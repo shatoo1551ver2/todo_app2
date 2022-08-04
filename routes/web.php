@@ -11,18 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::resource("goals", "GoalController")->middleware('auth');
 
-Route::resouce("goald", "GoalController");
+Route::resource("goals.todos", "TodoController")->middleware('auth');
 
-Route::resource("goals.todos", "TodoController");
-
-Route::post('/goals/{goal}/todos/{todo}/sort', 'TodoController@sort');
+Route::post('/goals/{goal}/todos/{todo}/sort', 'TodoController@sort')->middleware('auth');
 
 Auth::routes();
