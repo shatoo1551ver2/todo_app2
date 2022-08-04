@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resouce("goald", "GoalController");
+
+Route::resource("goals.todos", "TodoController");
+
+Route::post('/goals/{goal}/todos/{todo}/sort', 'TodoController@sort');
+
+Auth::routes();
